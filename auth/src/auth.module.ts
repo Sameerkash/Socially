@@ -3,7 +3,7 @@ import { JwtConfigService } from './services/config/jwt-config.service';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongoConfigService } from './services/config/mongo-config.service';
-import { AuthTokenSchema } from './schema/token.schema';
+import { AuthTokenSchema } from './schema/authToken.schema';
 
 @Module({
   imports: [
