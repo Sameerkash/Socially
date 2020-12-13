@@ -14,7 +14,9 @@ export class UserService {
   public async updateUserById(id: string, userParams: {is_confirmed: boolean}): Promise<User> {
     return this.userModel.updateOne({_id: id}, userParams).exec();
   }
-
+  public async searchUser(params: {email: string}): Promise<User[]> {
+    return this.userModel.find(params).exec();
+  }
   public async createUser(user: User): Promise<User> {
     const userModel = new this.userModel(user);
     return await userModel.save();

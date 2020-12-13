@@ -1,32 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ClientProxyFactory } from '@nestjs/microservices';
 // import { AppController } from './app.controller';
-import { ConfigService } from './services/app.service';
+import { ConfigService } from './services/config/config.service';
 
 @Module({
   imports: [],
   controllers: [],
-  providers: [ConfigService,
-  {
-    provide: 'TOKEN_SERVICE',
-      useFactory: (configService: ConfigService) => {
-        const tokenServiceOptions = configService.get('tokenService');
-        return ClientProxyFactory.create(tokenServiceOptions);
-      },
-      inject: [
-        ConfigService
-      ]
-  },
-  {
-    provide: 'USER_SERVICE',
-    useFactory: (configService: ConfigService) => {
-      const userServiceOptions = configService.get('userService');
-      return ClientProxyFactory.create(userServiceOptions);
-    },
-    inject: [
-      ConfigService
-    ]
-  },
-  ],
+  providers: [ConfigService],
 })
-export class  AppModule {}
+export class AppModule {}

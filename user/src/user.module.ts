@@ -1,10 +1,26 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
+import { ClientProxyFactory } from '@nestjs/microservices';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserSchema } from './schema/user.schema';
+import { ConfigService } from './services/config/config.service';
+import { MongoConfigService } from './services/config/mongo-config.service';
 import { UserService } from './services/user.service';
+import { UserController } from './user.controller';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [UserService],
+  imports: [
+    MongooseModule.forRootAsync({
+      useClass: MongoConfigService,
+    }),
+    MongooseModule.forFeature([
+      {
+        name: 'User',
+        schema: UserSchema,
+        collection: 'users',
+      },
+    ]),
+  ],
+  controllers: [UserController],
+  providers: [UserService, ConfigService],
 })
 export class UserModule {}
