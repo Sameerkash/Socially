@@ -16,7 +16,17 @@ import { ConfigService } from './services/app.service';
       inject: [
         ConfigService
       ]
-  }
+  },
+  {
+    provide: 'USER_SERVICE',
+    useFactory: (configService: ConfigService) => {
+      const userServiceOptions = configService.get('userService');
+      return ClientProxyFactory.create(userServiceOptions);
+    },
+    inject: [
+      ConfigService
+    ]
+  },
   ],
 })
-export class AppModule {}
+export class  AppModule {}
