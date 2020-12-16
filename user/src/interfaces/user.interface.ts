@@ -4,5 +4,11 @@ export interface IUserCreateResponse {
   status: number;
   message: string;
   user: User | null;
-  errors: {[key: string]: any} | null;
+  errors: { [key: string]: any } | null;
+}
+
+export interface IUserCreateDto {
+  email: string;
+  password: string;
+  name: string;
 }
