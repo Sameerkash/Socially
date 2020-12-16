@@ -11,4 +11,5 @@ export interface IUserCreateDto {
   email: string;
   password: string;
   name: string;
+  verified:boolean;
 }
