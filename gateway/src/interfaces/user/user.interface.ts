@@ -1,3 +1,5 @@
+import { Result } from '../common/utils.interface';
+
 export interface IUser {
   id: string;
   email: string;
@@ -7,13 +9,15 @@ export interface IUser {
 export interface CreateUserDto {
   email: string;
   password: string;
-  name: string ;
+  name: string;
 }
 
-
-export interface IUserCreateResponse {
-  status: number;
-  message: string;
+export type UserCreateResponse = {
   user: IUser | null;
-  errors: { [key: string]: any } | null;
-}
+  result: Result;
+};
+
+export type UsersResposne = {
+  users: IUser[] | [] | null;
+  result: Result;
+};
