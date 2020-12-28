@@ -7,12 +7,27 @@ import {
 import { User } from './schema/user.schema';
 import { UserService } from './services/user.service';
 
+/**
+ * UserController .
+ *
+ *
+ */
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService, // @Inject('MAILER_SERVICE') private readonly mailerServiceClient: ClientProxy,
   ) {}
 
+  /**
+   * Handles incoming requests to create a new user in database.
+   *
+   * @param user
+   *
+   * @returns errors - 'user_create_bad_request' if incoming fields are missing
+   * @returns errors - 'user_create_conflict' if email already exists
+   * @returns result  - 'user_create_success' if none of condtitons above are met
+   *
+   */
   @MessagePattern('create_user')
   public async createUser(user: IUserCreateDto): Promise<IUserCreateResponse> {
     let result: IUserCreateResponse;
@@ -65,8 +80,4 @@ export class UserController {
 
     return result;
   }
-
-
-
-  
 }
