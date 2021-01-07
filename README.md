@@ -26,5 +26,5 @@
 **Intial Architecture**
 
 
-<img src ="./diagrams/Microservice.png" width="800" height="500">
+<img src ="./diagrams/Microservice.jpeg" width="800" height="500">
 
