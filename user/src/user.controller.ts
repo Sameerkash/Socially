@@ -2,7 +2,9 @@ import { Controller, HttpStatus, Logger } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import {
   IUserCreateDto,
+  IUserUpdateDto,
   UserCreateResponse,
+  UserResponse,
   UsersResponse,
 } from './interfaces/user.interface';
 import { PaginationParams } from './interfaces/utils.interface';
@@ -98,7 +100,7 @@ export class UserController {
    *
    * @param page
    *
-   * @returns first five users if no skip and take are specifid
+   * @returns first five users if no skip and take are specified
    * @returns  users within the specified range
    */
   @MessagePattern('get_users')
@@ -145,5 +147,23 @@ export class UserController {
       };
     }
     return result;
+  }
+
+  public async updateProfile(
+    profile: IUserUpdateDto,
+    id: string,
+  ): Promise<UserResponse> {
+    try {
+      const user: User = await this.userService.updateProfile(profile, id);
+
+      return {
+        users: user,
+        result: {
+          message: 'profile_update_success',
+          errors: null,
+          status: HttpStatus.OK,
+        },
+      };
+    } catch (error) {}
   }
 }

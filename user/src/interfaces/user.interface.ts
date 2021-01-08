@@ -1,4 +1,3 @@
-import { response } from 'express';
 import { User } from '../schema/user.schema';
 import { Result } from './utils.interface';
 
@@ -11,8 +10,19 @@ export type UsersResponse = {
   result: Result;
   users: User[] | null | [];
 };
+
+export type UserResponse = {
+  result: Result;
+  users: User | null;
+};
 export interface IUserCreateDto {
   email: string;
+  password: string;
+  name: string;
+  verified: boolean;
+}
+
+export interface IUserUpdateDto {
   password: string;
   name: string;
   verified: boolean;
