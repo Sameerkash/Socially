@@ -14,7 +14,7 @@ import { UserService } from './services/user.service';
 /**
  * UserController
  *
- *
+ * The controller class for user service
  */
 @Controller('user')
 export class UserController {
@@ -98,6 +98,8 @@ export class UserController {
   /**
    * getAllUsers
    *
+   * fetches all `users` from the databse limited as specified by page
+   *
    * @param page
    *
    * @returns first five users if no skip and take are specified
@@ -149,6 +151,17 @@ export class UserController {
     return result;
   }
 
+
+  /**
+   * getAllUsers
+   *
+   * uodates a user 
+   *
+   * @param page
+   *
+   * @returns first five users if no skip and take are specified
+   * @returns  users within the specified range
+   */
   public async updateProfile(
     profile: IUserUpdateDto,
     id: string,

@@ -13,6 +13,14 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
+  /**
+   * updateUserById
+   *
+   * Updates the `user` confirmed status specified by id
+   *
+   * @param id string userId
+   * @param userParams booelan is_confirmed
+   */
   public async updateUserById(
     id: string,
     userParams: { is_confirmed: boolean },
@@ -23,11 +31,23 @@ export class UserService {
     return this.userModel.find(params).exec();
   }
 
+  /**
+   * createUser
+   *
+   * creates a new user in the database
+   *
+   * @param user - takes in IUserCreateDto
+   */
   public async createUser(user: IUserCreateDto): Promise<User> {
     const userModel = new this.userModel(user);
     return await userModel.save();
   }
 
+  /**
+   * fetchAllUsers
+   *
+   * @param page - Pagination paramas `skip` and `take`
+   */
   public async fecthAllUsers(page: PaginationParams): Promise<User[]> {
     return this.userModel
       .find()
@@ -37,8 +57,16 @@ export class UserService {
 
   /**
    * updateProfile
+   *
+   * updates the user details, `name`, `password` and `verified` status
+   *
+   * @param profile updateProfile params
+   * @param id  string
    */
-  public async updateProfile(profile: IUserUpdateDto, id: string) : Promise<User>{
+  public async updateProfile(
+    profile: IUserUpdateDto,
+    id: string,
+  ): Promise<User> {
     return this.userModel
       .updateOne(
         { _id: id },
